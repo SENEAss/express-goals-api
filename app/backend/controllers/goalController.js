@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
-const getGoals = asyncHandler(async (req, res) => {
-res.json({ message: 'Get goals' })
-})
+// const getGoals = asyncHandler(async (req, res) => {
+// res.json({ message: 'Get goals' })
+// })
 
 const GoalModel = require('../models/goalModel')
 
@@ -15,15 +15,8 @@ const createGoal = asyncHandler(async (req, res) => {
 })
 
 
-const addGoal = asyncHandler(async (req, res) => {
-if (! req.body.text) {
-res.status(400)
-throw new Error('Please write a goal')
-}
-res.json({ message: 'Add goal' })
-})
 const updateGoal = asyncHandler(async (req, res) => {
-    const goal = await GoalModel.findById(req.params.id)
+const goal = await GoalModel.findById(req.params.id)
     if (!goal) {
     res.status(400)
     throw new Error('Goal not found')
@@ -43,9 +36,8 @@ const deleteGoal = asyncHandler(async (req, res) => {
     res.status(200).json(deletedGoal)
 })
 module.exports = {
-getGoals,
-addGoal,
+createGoal,
 updateGoal,
 deleteGoal,
-createGoal
+createGoal,
 }
